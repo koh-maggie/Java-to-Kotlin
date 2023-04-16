@@ -10,7 +10,6 @@ package com.lannstark.lec09
     (default parameter 나, 정적 팩토리 메소드 추천)
 - Kotlin 에서는 실 메모리에 존재하는 것과는 무관하게 custom getter 와 setter 생성 가능. (상세 까보면 함수로 되어있음)
 - custom getter , setter 에서는 무한루프를 막기위해 field 를 사용 (backing field)
-ㄴ
 */
 
 fun main() {
