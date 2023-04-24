@@ -128,3 +128,16 @@
   - object : 타입 사용
   - 특정 인터페이스나 클래스를 상속받은 구현체를 일회성으로 사용할 때 쓰는 클래스
   - Java 에서는 new 타입이름() Kotlin 에서는 object : 타입이름{}
+
+# 13. 코틀린에서 중첩 클래스를 다루는 방법
+- 클래스 안에 클래스가 있는 경우 종류는 두가지.
+    - (Java 기준) static 사용 클래스 -> (Kotlin 기준) 클래스 안의 클래스
+    - (Java 기준) static 사용 x 클래스 -> (Kotlin 기준) 클래스 안의 inner 클래스
+- Kotlin은 기본적으로 바깥 클래스에 대한 연결이 없는 중첩 클래스.
+- Kotlin에서 권장되지 않는 바깥 클래스 연결하려면 앞의 inner 라는 키워드를 작성.
+- Kotlin inner class 에서 바깥 클래스 참조하려면 this@바깥 클래스 사용해야함.
+
+# 14. 코틀린에서 다양한 클래스를 다루는 방법
+- Kotlin 의 Data Class 사용하면 equals , hashCode, toString 을 자동으로 생성해줌.
+- When Expression 은 Enum Class 와 같이 쓸 때 시너지 발생함.
+- Enum Class 보다 유연하지만, 하위 클래스를 제한하는 Sealed Class 역시, when 과 주로 사용됨.
