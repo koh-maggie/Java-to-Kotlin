@@ -215,7 +215,7 @@ fun 확장하려는클래스.함수이름(파라미터): 리턴타입 {
 - 람다의 마지막 expression 의 결과는 람다의 반환값이다. return 을 굳이 해주지 않아도 마지막 expression 이 반한이 됨.
 - 코틀린에서는 Closure 를 사용하여 non-final 변수도 람다에서 사용 가능.
 
-# 18. 코틀린에서 컬레션을 함수로 다루는 방법
+# 18. 코틀린에서 컬렉션을 함수로 다루는 방법
 - 필터와 맵
     - .filter
     - filter 에서 index 가 필요할 때, .filterIndexed 
