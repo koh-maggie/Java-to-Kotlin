@@ -173,3 +173,77 @@ fun 확장하려는클래스.함수이름(파라미터): 리턴타입 {
 
 - 지역함수
     - 코틀린에서는 함수 안에 함수를 선언할 수 있고, 지역함수라고 함.
+
+# 17. 코틀린에서 람다를 다루는 방법 
+- 함수는 Java 에서 2급시민이지만, 코틀린에서는 1급시민이다.
+    - 함수자체를 변수에 넣을 수 있고, 파라미터로도 전달 가능
+-  코틀린에서 함수 타입은 (파라미터 타입) -> 반환타입
+- 코틀린에서 람다 만드는 방식
+    - fun 다음에 함수 이름이 없음
+    - 함수이름이 없이 바로 파라미터를 받을 수 있는 즉, 이름 없는 함수 = 람다 임.
+
+    ```
+    val isApple = fun(fruit : Fruit) : Boolean {
+        return fruit.name == "사과"
+    }
+    ```
+    - 중괄호 화살표 사용하는 방법 (요게 좀 더 많이 씀.)
+    ```
+    val isApple2 = {fruit : Fruit -> fruit.name == "사과"}
+    ```
+
+- 코틀린에서 람다 직접 호출 방법
+    - 소괄호를 쓰는 경우
+    ```
+    isApple(Fruit("사과",1_000))
+    ```
+
+    - invoke 를 써주는 방법
+    ```
+    isApple.invoke(Fruit("사과",1_000))
+    ```
+    - 중괄호 가 소괄호 안에 있는 게 어색할 수 있어, 소괄호 밖으로 중괄호를 밖으로 빼면  마지막 파라미터로 셋팅됨.
+    ```
+    filterFruits(fruits) {fruit -> fruit.name == "사과"}
+    ```
+    - 익명함수 파라미터가 한개면 it 이라고 해주면 it 이 fruit 그 자체가 됨.
+    - 다만, it 을 사용하면 함수를 부르는 쪽 코드만 봐서는 어떤 데이터인지 판단이 어려울 수 있음.
+    ```
+    filterFruits(fruits) {it.name == "사과"}
+    ```
+
+- 람다의 마지막 expression 의 결과는 람다의 반환값이다. return 을 굳이 해주지 않아도 마지막 expression 이 반한이 됨.
+- 코틀린에서는 Closure 를 사용하여 non-final 변수도 람다에서 사용 가능.
+
+# 18. 코틀린에서 컬레션을 함수로 다루는 방법
+- 필터와 맵
+    - .filter
+    - filter 에서 index 가 필요할 때, .filterIndexed 
+    - .map 기능을 사용해서 특정 속성 값을 가져올 수 있다. 
+    - .mapIndexed 
+    - Mapping 의 결과가 null 이 아닌 것만 가져오고 싶다면 ?! 
+        -  .mapNotNull 이라는 걸 쓸 수도 있음.
+
+- 다양한 컬렉션 처리 기능 
+    - all : 조건을 모두 만족하면 true , 그렇지 않으면 false
+    - none : 조건을 모두 불만족하면 true , 그렇지 않으면 false 
+    - any : 조건을 하나라도 만족하면 true , 그렇지 않으면 false
+    - count : 갯수를 센다. List 에서 size 기능과 동일하닥 보면됨.
+    - sortedBy : 기본적으로 오름차순, 정렬 함.
+    - sortedByDescending : 기본적으로 내림차순 , 정렬 함. 
+    - distinctBy : 변형된 값을 기준으로 중복 제거
+    - first : 첫번째 값을 가져옴. (무조건 null 이 아니어야 함. )
+        - 첫번째 값이 null 이면 Exception 발생. 
+    - firstOrNull : 첫번째 값 또는 null을 가져옴. 
+    - last : 마지막 값을 가져옴. (무조건 null 이 아니어야 함. )
+    - lastOrNull : 마지막 값 또는 null을 가져옴.
+  
+- List 를 Map 으로 
+    - group by : { } 안의 기준 잡은 걸로 그룹핑이 됨.
+    - associateBy : id 를 통해서 , 즉 중복되지 않은 키를 가지고 map 을 만들때 사용 (단일객체)
+    - {} 안에 써주는게 convention 임.
+    - 필터링 같이 앞선 기능하고 같이 사용할 수 있음. 
+
+- 중첩된 컬렉션 처리
+    - flatMap : List 가 단일 list 로 바뀜. , 단일 List 로 바뀔 때, 조건에 람다 걸어서 사용 가능 
+    - flatten() : 중첩되어 있는 컬렉션이 중첩해제되서 모두 평탄화 되는 List<?>로 바뀜. 
